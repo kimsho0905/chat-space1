@@ -27,17 +27,15 @@
 ## groups table
 |Column|Type|Options|
 |------|----|-------|
-|name|text|null: false|
-|message_id|integer|null: false, foreign_key: true|
+|name|string|null: false|
 ### Association
-- belongs_to :message
+- has_many :messages
 - has_many :users_groups
 - has_many :users, through: users_groups
 
 ## users_groups table
 |Column|Type|Options|
 |------|----|-------|
-|name|text|null: false|
 |user_id|integer|null: false, foreign_key: true|
 |group_id|integer|null: false, foreign_key: true|
 ### Association
