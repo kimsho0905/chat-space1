@@ -1,0 +1,49 @@
+.chat-main
+  .chat-main__group-info
+    .header
+      .header__group-name
+        aa
+      .header__member-names
+        Member: masa
+    .edit-btn
+      =link_to "Edit", "#"
+
+  .chat-main__message-list
+    .messages
+      .messages__messanger
+        masa
+        .messages__messanger__timestamp
+          2020/2/21(Fri) 19:16
+    .messages__message
+      hello!!!
+    .messages
+      .messages__messanger
+        masa
+        .messages__messanger__timestamp
+          2020/2/21(Fri) 19:16
+    .messages__message
+      hello!!!
+    .messages
+      .messages__messanger
+        masa
+        .messages__messanger__timestamp
+          2020/2/21(Fri) 19:16
+    .messages__message
+      hello!!!
+    .messages
+      .messages__messanger
+        masa
+        .messages__messanger__timestamp
+          2020/2/21(Fri) 19:16
+    .messages__message
+      hello!!!
+
+  .chat-main__message-form
+    .send-message-form
+      .send-message
+        = form_for "#" do |f|
+          = f.label :image, class: "form-box" do
+            = f.text_field :text, autofocus: true, placeholder: "type a message", class: 'form-message'
+            %i.far.fa-image.fa-2x
+            = f.file_field :image, class: "form-image"
+          = f.submit "send", class: "send-btn"
