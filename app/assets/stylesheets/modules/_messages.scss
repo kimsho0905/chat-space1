@@ -33,12 +33,12 @@ $whity: #ffffff;
         width: 60px;
         display: flex;
         justify-content: flex-end;
-        &__edit{
+        &__new-group{
           a{
             color: $whity;
           }
         }
-        &__new-group{
+        &__edit{
           margin-left: 5px;
           a{
             color: $whity;
