@@ -4,16 +4,18 @@
       .top-items__name
         = current_user.name
       .top-items__icon
-        .top-items__icon__edit
-          = link_to "#" do
-            %i.fas.fa-edit
         .top-items__icon__new-group
+          = link_to new_group_path do
+            %i.fas.fa-edit
+        .top-items__icon__edit
           = link_to edit_user_path(current_user) do
             %i.fas.fa-cog
 
   .side-bar__groups
-    .groups-group
-      .group__group-name
-        aiueo
-      .group__group-message
-        yum
+    - current_user.groups.each do |group|
+      .groups-group
+        = link_to group_messages_path(group) do
+          .group__group-name
+            = group.name
+          .group__group-message
+            = group.show_last_message
