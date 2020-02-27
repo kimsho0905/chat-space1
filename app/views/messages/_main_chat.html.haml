@@ -2,48 +2,24 @@
   .chat-main__group-info
     .header
       .header__group-name
-        aa
+        = @group.name
       .header__member-names
-        Member: masa
+        Member:
+        - @group.users.each do |user|
+          = user.name
     .edit-btn
-      =link_to "Edit", "#"
+      =link_to edit_group_path(@group.id) do
+        Edit
 
   .chat-main__message-list
-    .messages
-      .messages__messanger
-        masa
-        .messages__messanger__timestamp
-          2020/2/21(Fri) 19:16
-    .messages__message
-      hello!!!
-    .messages
-      .messages__messanger
-        masa
-        .messages__messanger__timestamp
-          2020/2/21(Fri) 19:16
-    .messages__message
-      hello!!!
-    .messages
-      .messages__messanger
-        masa
-        .messages__messanger__timestamp
-          2020/2/21(Fri) 19:16
-    .messages__message
-      hello!!!
-    .messages
-      .messages__messanger
-        masa
-        .messages__messanger__timestamp
-          2020/2/21(Fri) 19:16
-    .messages__message
-      hello!!!
-
+    = render @messages
+     
   .chat-main__message-form
     .send-message-form
       .send-message
-        = form_for "#" do |f|
+        = form_for [@group, @message] do |f|
           = f.label :image, class: "form-box" do
-            = f.text_field :text, autofocus: true, placeholder: "type a message", class: 'form-message'
+            = f.text_field :content, autofocus: true, placeholder: "type a message", class: 'form-message'
             %i.far.fa-image.fa-2x
             = f.file_field :image, class: "form-image"
-          = f.submit "send", class: "send-btn"
+          = f.submit "Send", class: "send-btn"
