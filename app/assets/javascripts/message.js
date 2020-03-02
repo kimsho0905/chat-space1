@@ -1,6 +1,23 @@
 $(function(){ 
-     function buildHTML(message){
-      if ( message.image ) {
+  
+    var buildHTML = function buildHTML(message){
+      if ( message.content && message.image ) {
+        var html =
+         `<div class="messages" data-message-id=${message.id}> 
+            <div class="messages__messanger">
+              ${message.user_name}
+              <div class="messages__messanger__timestamp">
+                ${message.created_at}
+              </div>
+            </div>
+            <div class="messages__message">
+              <p class="lower-message__content">
+                 ${message.content}
+              </p>
+            </div>
+            <img src="${message.image}" class="lower-message__image"
+          </div>`
+      } else if (message.content) {
         var html =
          `<div class="messages" data-message-id=${message.id}>
             <div class="messages__messanger">
@@ -14,10 +31,8 @@ $(function(){
                 ${message.content}
               </p>
             </div>
-            <img src=${message.image} >
           </div>`
-        return html;
-      } else {
+      } else if (message.image) {
         var html =
          `<div class="messages" data-message-id=${message.id}>
             <div class="messages__messanger">
@@ -26,15 +41,11 @@ $(function(){
                 ${message.created_at}
               </div>
             </div>
-            <div class="messages__message">
-              <p class="lower-message__content">
-                ${message.content}
-              </p>
-            </div>
+            <img src= ${message.image} class="lower-message__image" >
           </div>`
-        return html;
       };
-    }
+      return html;
+    };
 
   $('#new_message').on('submit', function(e){
     e.preventDefault();
@@ -62,4 +73,30 @@ $(function(){
       $('.send-btn').prop('disabled', false);
     });
   });
+
+  var reloadMessages = function() {
+    var last_message_id = $('.messages:last').data("message-id");
+    $.ajax({
+      url: "api/messages",
+      type: 'get',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      if (messages.length !== 0) {
+        var insertHTML = '';
+        $.each(messages, function(i, message) {
+          insertHTML += buildHTML(message)
+        });
+        $('.chat-main__message-list').append(insertHTML);
+        $('.chat-main__message-list').animate({ scrollTop: $('.chat-main__message-list')[0].scrollHeight});
+      }
+    })
+    .fail(function() {
+      alert('error');
+    });
+  };
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
+  }
 });
