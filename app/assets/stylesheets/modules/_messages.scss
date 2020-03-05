@@ -21,7 +21,7 @@ $whity: #ffffff;
     .top-items{
       height: 20px;
       margin: 0 20px;
-      background-color: #333333;
+      background-color:#253141;
       width: 300px - 40px;
       display: flex;
       justify-content: space-between;
@@ -54,17 +54,21 @@ $whity: #ffffff;
     font-weight: bold;
     height: calc(100vh - 100px);
     overflow-y: scroll;
+    a{
+      text-decoration: none;
+    }
     .group{
       &__group-name{
         color: $whity;
         font-size: 15px;
         margin-bottom: 5px;
+        a{
+        }
       }
       &__group-message{
         font-size: 11px;
         margin-bottom: 40px;
         color: $whity;
-        text-decoration: none;
       }
     }
   }
